@@ -35,7 +35,7 @@ namespace EF_CodeFirst
 
                 Team winner = game1.Play();
 
-                db.SaveChanges();  // IsFinished is 1
+                db.SaveChanges();  // IsFinished is 1  
 
                 Console.WriteLine($"The winner is {winner.Name}");
             }
