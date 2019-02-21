@@ -32,7 +32,7 @@ namespace EF_CodeFirst
                 db.Games.Add(game1);
 
                 db.SaveChanges();  // IsFinished is 0
-
+                
                 Team winner = game1.Play();
 
                 db.SaveChanges();  // IsFinished is 1  
