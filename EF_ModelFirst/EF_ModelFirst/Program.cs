@@ -81,6 +81,7 @@ namespace EF_ModelFirst
 
                 db.Authors.Add(author1);
                 db.Authors.Add(author2);
+
                 db.SaveChanges();
             }
             catch (DbEntityValidationException e)
