@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="1e18b634bee747119f16e49de47f62ea" Name="Diagram1" ZoomLevel="86">
+        <EntityTypeShape EntityType="DB_For_DbFirstModel.ClassRoom" Width="1.5" PointX="2" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_For_DbFirstModel.ProgrammingCourses" Width="1.5" PointX="2" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_For_DbFirstModel.Score" Width="1.5" PointX="7.375" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_For_DbFirstModel.Stage" Width="1.5" PointX="4.125" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_For_DbFirstModel.Student" Width="1.5" PointX="7" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_For_DbFirstModel.Trainer" Width="1.5" PointX="4.5" PointY="4.5" IsExpanded="true" />
+        <AssociationConnector Association="DB_For_DbFirstModel.FK__Stage__ClassRoom__2A4B4B5E" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_For_DbFirstModel.FK__Stage__Programmi__2B3F6F97" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_For_DbFirstModel.FK__Students__Score___300424B4" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_For_DbFirstModel.FK__Stage__Trainer_I__29572725" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_For_DbFirstModel.FK__Students__Stage___30F848ED" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

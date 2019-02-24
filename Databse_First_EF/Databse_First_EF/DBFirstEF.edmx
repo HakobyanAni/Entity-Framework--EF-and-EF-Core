@@ -1,0 +1,411 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DB_For_DbFirstModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ClassRoom">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="Count of computers" Type="int" />
+        </EntityType>
+        <EntityType Name="ProgrammingCourses">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="15" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Score">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Activity" Type="int" Nullable="false" />
+          <Property Name="Github performance" Type="int" Nullable="false" />
+          <Property Name="Knowledge sharing" Type="int" Nullable="false" />
+          <Property Name="Homework" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Stage">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Price" Type="int" />
+          <Property Name="Duration (month)" Type="int" Nullable="false" />
+          <Property Name="Language" Type="varchar" MaxLength="20" />
+          <Property Name="Trainer_ID" Type="int" Nullable="false" />
+          <Property Name="ClassRoom_ID" Type="int" Nullable="false" />
+          <Property Name="Programming_Course_ID" Type="int" />
+        </EntityType>
+        <EntityType Name="Students">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="LastName" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="BirthDate" Type="date" />
+          <Property Name="Mark" Type="int" Nullable="false" />
+          <Property Name="Score_ID" Type="int" Nullable="false" />
+          <Property Name="Stage_ID" Type="int" />
+        </EntityType>
+        <EntityType Name="Trainers">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="LastName" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Language" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <Association Name="FK__Stage__ClassRoom__2A4B4B5E">
+          <End Role="ClassRoom" Type="Self.ClassRoom" Multiplicity="1" />
+          <End Role="Stage" Type="Self.Stage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClassRoom">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Stage">
+              <PropertyRef Name="ClassRoom_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Stage__Programmi__2B3F6F97">
+          <End Role="ProgrammingCourses" Type="Self.ProgrammingCourses" Multiplicity="0..1" />
+          <End Role="Stage" Type="Self.Stage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProgrammingCourses">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Stage">
+              <PropertyRef Name="Programming_Course_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Stage__Trainer_I__29572725">
+          <End Role="Trainers" Type="Self.Trainers" Multiplicity="1" />
+          <End Role="Stage" Type="Self.Stage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Trainers">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Stage">
+              <PropertyRef Name="Trainer_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Students__Score___300424B4">
+          <End Role="Score" Type="Self.Score" Multiplicity="1" />
+          <End Role="Students" Type="Self.Students" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Score">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Students">
+              <PropertyRef Name="Score_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Students__Stage___30F848ED">
+          <End Role="Stage" Type="Self.Stage" Multiplicity="0..1" />
+          <End Role="Students" Type="Self.Students" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Stage">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Students">
+              <PropertyRef Name="Stage_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DB_For_DbFirstModelStoreContainer">
+          <EntitySet Name="ClassRoom" EntityType="Self.ClassRoom" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProgrammingCourses" EntityType="Self.ProgrammingCourses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Score" EntityType="Self.Score" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Stage" EntityType="Self.Stage" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Students" EntityType="Self.Students" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Trainers" EntityType="Self.Trainers" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Stage__ClassRoom__2A4B4B5E" Association="Self.FK__Stage__ClassRoom__2A4B4B5E">
+            <End Role="ClassRoom" EntitySet="ClassRoom" />
+            <End Role="Stage" EntitySet="Stage" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Stage__Programmi__2B3F6F97" Association="Self.FK__Stage__Programmi__2B3F6F97">
+            <End Role="ProgrammingCourses" EntitySet="ProgrammingCourses" />
+            <End Role="Stage" EntitySet="Stage" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Stage__Trainer_I__29572725" Association="Self.FK__Stage__Trainer_I__29572725">
+            <End Role="Trainers" EntitySet="Trainers" />
+            <End Role="Stage" EntitySet="Stage" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Students__Score___300424B4" Association="Self.FK__Students__Score___300424B4">
+            <End Role="Score" EntitySet="Score" />
+            <End Role="Students" EntitySet="Students" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Students__Stage___30F848ED" Association="Self.FK__Students__Stage___30F848ED">
+            <End Role="Stage" EntitySet="Stage" />
+            <End Role="Students" EntitySet="Students" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DB_For_DbFirstModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ClassRoom">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Count_of_computers" Type="Int32" />
+          <NavigationProperty Name="Stages" Relationship="Self.FK__Stage__ClassRoom__2A4B4B5E" FromRole="ClassRoom" ToRole="Stage" />
+        </EntityType>
+        <EntityType Name="ProgrammingCourses">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Stages" Relationship="Self.FK__Stage__Programmi__2B3F6F97" FromRole="ProgrammingCourses" ToRole="Stage" />
+        </EntityType>
+        <EntityType Name="Score">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Activity" Type="Int32" Nullable="false" />
+          <Property Name="Github_performance" Type="Int32" Nullable="false" />
+          <Property Name="Knowledge_sharing" Type="Int32" Nullable="false" />
+          <Property Name="Homework" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Students" Relationship="Self.FK__Students__Score___300424B4" FromRole="Score" ToRole="Students" />
+        </EntityType>
+        <EntityType Name="Stage">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Price" Type="Int32" />
+          <Property Name="Duration__month_" Type="Int32" Nullable="false" />
+          <Property Name="Language" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Trainer_ID" Type="Int32" Nullable="false" />
+          <Property Name="ClassRoom_ID" Type="Int32" Nullable="false" />
+          <Property Name="Programming_Course_ID" Type="Int32" />
+          <NavigationProperty Name="ClassRoom" Relationship="Self.FK__Stage__ClassRoom__2A4B4B5E" FromRole="Stage" ToRole="ClassRoom" />
+          <NavigationProperty Name="ProgrammingCours" Relationship="Self.FK__Stage__Programmi__2B3F6F97" FromRole="Stage" ToRole="ProgrammingCourses" />
+          <NavigationProperty Name="Trainer" Relationship="Self.FK__Stage__Trainer_I__29572725" FromRole="Stage" ToRole="Trainers" />
+          <NavigationProperty Name="Students" Relationship="Self.FK__Students__Stage___30F848ED" FromRole="Stage" ToRole="Students" />
+        </EntityType>
+        <EntityType Name="Student">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="BirthDate" Type="DateTime" Precision="0" />
+          <Property Name="Mark" Type="Int32" Nullable="false" />
+          <Property Name="Score_ID" Type="Int32" Nullable="false" />
+          <Property Name="Stage_ID" Type="Int32" />
+          <NavigationProperty Name="Score" Relationship="Self.FK__Students__Score___300424B4" FromRole="Students" ToRole="Score" />
+          <NavigationProperty Name="Stage" Relationship="Self.FK__Students__Stage___30F848ED" FromRole="Students" ToRole="Stage" />
+        </EntityType>
+        <EntityType Name="Trainer">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Language" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Stages" Relationship="Self.FK__Stage__Trainer_I__29572725" FromRole="Trainers" ToRole="Stage" />
+        </EntityType>
+        <Association Name="FK__Stage__ClassRoom__2A4B4B5E">
+          <End Role="ClassRoom" Type="Self.ClassRoom" Multiplicity="1" />
+          <End Role="Stage" Type="Self.Stage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClassRoom">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Stage">
+              <PropertyRef Name="ClassRoom_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Stage__Programmi__2B3F6F97">
+          <End Role="ProgrammingCourses" Type="DB_For_DbFirstModel.ProgrammingCourses" Multiplicity="0..1" />
+          <End Role="Stage" Type="Self.Stage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProgrammingCourses">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Stage">
+              <PropertyRef Name="Programming_Course_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Students__Score___300424B4">
+          <End Role="Score" Type="Self.Score" Multiplicity="1" />
+          <End Role="Students" Type="Self.Student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Score">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Students">
+              <PropertyRef Name="Score_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Stage__Trainer_I__29572725">
+          <End Role="Trainers" Type="Self.Trainer" Multiplicity="1" />
+          <End Role="Stage" Type="Self.Stage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Trainers">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Stage">
+              <PropertyRef Name="Trainer_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Students__Stage___30F848ED">
+          <End Role="Stage" Type="Self.Stage" Multiplicity="0..1" />
+          <End Role="Students" Type="Self.Student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Stage">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Students">
+              <PropertyRef Name="Stage_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DB_For_DbFirstEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ClassRooms" EntityType="Self.ClassRoom" />
+          <EntitySet Name="ProgrammingCourses" EntityType="DB_For_DbFirstModel.ProgrammingCourses" />
+          <EntitySet Name="Scores" EntityType="Self.Score" />
+          <EntitySet Name="Stages" EntityType="Self.Stage" />
+          <EntitySet Name="Students" EntityType="Self.Student" />
+          <EntitySet Name="Trainers" EntityType="Self.Trainer" />
+          <AssociationSet Name="FK__Stage__ClassRoom__2A4B4B5E" Association="Self.FK__Stage__ClassRoom__2A4B4B5E">
+            <End Role="ClassRoom" EntitySet="ClassRooms" />
+            <End Role="Stage" EntitySet="Stages" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Stage__Programmi__2B3F6F97" Association="Self.FK__Stage__Programmi__2B3F6F97">
+            <End Role="ProgrammingCourses" EntitySet="ProgrammingCourses" />
+            <End Role="Stage" EntitySet="Stages" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Students__Score___300424B4" Association="Self.FK__Students__Score___300424B4">
+            <End Role="Score" EntitySet="Scores" />
+            <End Role="Students" EntitySet="Students" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Stage__Trainer_I__29572725" Association="Self.FK__Stage__Trainer_I__29572725">
+            <End Role="Trainers" EntitySet="Trainers" />
+            <End Role="Stage" EntitySet="Stages" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Students__Stage___30F848ED" Association="Self.FK__Students__Stage___30F848ED">
+            <End Role="Stage" EntitySet="Stages" />
+            <End Role="Students" EntitySet="Students" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DB_For_DbFirstModelStoreContainer" CdmEntityContainer="DB_For_DbFirstEntities">
+          <EntitySetMapping Name="ClassRooms">
+            <EntityTypeMapping TypeName="DB_For_DbFirstModel.ClassRoom">
+              <MappingFragment StoreEntitySet="ClassRoom">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Count_of_computers" ColumnName="Count of computers" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProgrammingCourses">
+            <EntityTypeMapping TypeName="DB_For_DbFirstModel.ProgrammingCourses">
+              <MappingFragment StoreEntitySet="ProgrammingCourses">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Scores">
+            <EntityTypeMapping TypeName="DB_For_DbFirstModel.Score">
+              <MappingFragment StoreEntitySet="Score">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Activity" ColumnName="Activity" />
+                <ScalarProperty Name="Github_performance" ColumnName="Github performance" />
+                <ScalarProperty Name="Knowledge_sharing" ColumnName="Knowledge sharing" />
+                <ScalarProperty Name="Homework" ColumnName="Homework" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Stages">
+            <EntityTypeMapping TypeName="DB_For_DbFirstModel.Stage">
+              <MappingFragment StoreEntitySet="Stage">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Duration__month_" ColumnName="Duration (month)" />
+                <ScalarProperty Name="Language" ColumnName="Language" />
+                <ScalarProperty Name="Trainer_ID" ColumnName="Trainer_ID" />
+                <ScalarProperty Name="ClassRoom_ID" ColumnName="ClassRoom_ID" />
+                <ScalarProperty Name="Programming_Course_ID" ColumnName="Programming_Course_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Students">
+            <EntityTypeMapping TypeName="DB_For_DbFirstModel.Student">
+              <MappingFragment StoreEntitySet="Students">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
+                <ScalarProperty Name="Mark" ColumnName="Mark" />
+                <ScalarProperty Name="Score_ID" ColumnName="Score_ID" />
+                <ScalarProperty Name="Stage_ID" ColumnName="Stage_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Trainers">
+            <EntityTypeMapping TypeName="DB_For_DbFirstModel.Trainer">
+              <MappingFragment StoreEntitySet="Trainers">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Language" ColumnName="Language" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
