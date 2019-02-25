@@ -39,7 +39,6 @@ namespace EF_CodeFirst
 
                 Console.WriteLine($"The winner is {winner.Name}");
             }
-
             Console.ReadKey(); 
         }
     }
